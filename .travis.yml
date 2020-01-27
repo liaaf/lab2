@@ -1,0 +1,24 @@
+language: c
+
+sudo: false
+
+env:
+  global:
+    - RACKET_DIR=~/racket
+  matrix:
+    - RACKET_VERSION=7.5
+
+before_install:
+  - git clone https://github.com/greghendershott/travis-racket.git
+  - cat travis-racket/install-racket.sh | bash # pipe to bash not sh!
+  - export PATH="${RACKET_DIR}/bin:${PATH}" #install-racket.sh can't set for us
+
+install:
+
+before_script:
+
+# Here supply steps such as raco make, raco test, etc.
+script:
+  - make && make test
+
+after_script:

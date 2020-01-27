@@ -1,0 +1,10 @@
+*~
+*.bak
+.DS_Store/
+\#*
+compiled/
+mceval
+lazy-mceval
+run-tests
+test-mceval
+test-lazy-mceval
