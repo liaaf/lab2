@@ -2,7 +2,8 @@
 (require rackunit)
 (require "mceval.rkt")
 
-(provide primitive-tests
+(provide basic-tests
+         primitive-tests
          and-or-tests
          let-tests
          force-delay-tests
@@ -14,6 +15,48 @@
 
 (define (test-mceval-exception exp)
   (mceval exp (setup-environment)))
+
+(define basic-tests
+  (test-suite
+   "Basic tests"
+   
+   (test-case
+    "quote"
+    (check-equal?
+     (test-mceval '(quote (a b c)))
+     '(a b c)))
+   
+   (test-case
+    "set!"
+    (check-equal?
+     (test-mceval '(begin (define x 0) (set! x 1) x))
+     1))
+   
+   (test-case
+    "if"
+    (check-equal?
+     (test-mceval '(if false false true))
+    #t))
+   
+   (test-case
+    "cond"
+    (check-equal?
+     (test-mceval '(cond (false 0) (true 1)))
+    1))
+   
+   (test-case
+    "Lambda application"
+    (check-equal?
+     (test-mceval '((lambda (x) x) 1))
+     1))
+   
+   (test-case
+    "Function application"
+    (check-equal?
+     (test-mceval '(begin (define (id x) x) (id 1)))
+     1))
+
+   ))
 
 (define primitive-tests
   (test-suite

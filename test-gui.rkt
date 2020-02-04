@@ -7,7 +7,8 @@
 
 (define mceval-tests
   (test-suite
-   "Metacricular Evaluator Tests"
+   "Metacircular Evaluator Tests"
+   basic-tests
    primitive-tests
    and-or-tests
    let-tests
